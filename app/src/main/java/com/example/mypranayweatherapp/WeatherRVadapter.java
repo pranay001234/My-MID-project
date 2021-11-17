@@ -29,7 +29,7 @@ public class WeatherRVadapter extends RecyclerView.Adapter<WeatherRVadapter.View
     @NonNull
     @Override
     public WeatherRVadapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.weather_rv_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.weather_rv_item1,parent,false);
         return new ViewHolder(view);
     }
 
@@ -38,10 +38,10 @@ public class WeatherRVadapter extends RecyclerView.Adapter<WeatherRVadapter.View
         //
         WeatherRvmodel model = weatherRvmodelArrayList.get(position);
         holder.TVtemperature.setText(model.getTemperature() + "°c");
-        Picasso.get().load("http:".concat(model.getIcon())).into(holder.TVcondition);
+        Picasso.get().load("http:".concat(model.getIcon())).into(holder.IVcondition);
         holder.TVwind.setText(model.getWindSpeed()+"km/h");
         SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-        SimpleDateFormat output = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat output = new SimpleDateFormat("hh:mm aa");
         try {
             Date t = input.parse(model.getTime());
             holder.TVtime.setText(output.format(t));
@@ -59,14 +59,14 @@ public class WeatherRVadapter extends RecyclerView.Adapter<WeatherRVadapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView TVwind,TVtemperature,TVtime;
-        private ImageView TVcondition;
+        private ImageView IVcondition;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             TVwind = itemView.findViewById(R.id.idTVWindSpeed);
             TVtemperature = itemView.findViewById(R.id.idTVTemperature);
             TVtime = itemView.findViewById(R.id.idTVTime);
-            TVcondition =itemView.findViewById(R.id.idTVCondition);
+            IVcondition =itemView.findViewById(R.id.idIVCondition);
         }
     }
 }

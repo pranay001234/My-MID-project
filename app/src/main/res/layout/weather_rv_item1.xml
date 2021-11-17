@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="100dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -21,7 +23,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/idTVTime"
             android:gravity="center"
-            android:padding="40dp"
+            android:padding="4dp"
             android:text="time"
             android:textColor="@color/white"
             android:textAlignment="center"
@@ -33,7 +35,7 @@
             android:gravity="center"
             android:text="20"
             android:textAlignment="center"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:layout_below="@id/idTVTime"
             android:textColor="@color/white"
             />
@@ -41,7 +43,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_below="@id/idTVTemperature"
-            android:id="@+id/idTVCondition"
+            android:id="@+id/idIVCondition"
             android:layout_centerHorizontal="true"
             android:layout_margin="5dp"
             android:padding="4dp"
@@ -52,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAlignment="center"
-            android:layout_below="@id/idTVCondition"
+            android:layout_below="@id/idIVCondition"
             android:layout_centerHorizontal="true"
             android:layout_margin="4dp"
             android:gravity="center"

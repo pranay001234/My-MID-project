@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,7 +13,7 @@
         android:id="@+id/idPBloading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_centerInParent="true"
         />
 
@@ -20,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/idRLHome"
-        android:visibility="visible"
+        android:visibility="gone"
         >
 
         <ImageView
@@ -46,9 +47,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:id="@+id/idEdtCity"
+            android:id="@+id/idLLEdt"
             android:layout_below="@+id/idTVCityName"
-            android:weightSum="5">
+            android:weightSum="5"
+            >
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="8dp"
@@ -60,8 +62,10 @@
                 android:hint="Enter City Name"
                 android:padding="5dp"
                 app:hintTextColor="@color/white"
-                android:textColorHint="@color/orange">
+                android:textColorHint="@color/orange"
+                >
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/idEdtCity"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -69,10 +73,10 @@
                     android:inputType="text"
                     android:singleLine="true"
                     android:textColor="@color/white"
-                    android:textSize="14dp"/>
+                    android:textSize="14sp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
-                android
+
             <ImageView
                 android:id="@+id/idIVSearch"
                 android:layout_width="0dp"
@@ -91,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/idTVTemperature"
-            android:layout_below="@+id/idEdtCity"
+            android:layout_below="@+id/idLLEdt"
             android:layout_margin="10dp"
             android:gravity="center_horizontal"
             android:padding="5dp"
@@ -123,7 +127,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:text="Today's Weather Forecast"
             android:textColor="@color/white"
             android:layout_above="@id/idRVWeather"
@@ -140,12 +144,5 @@
 
 
     </RelativeLayout>
-
-
-
-
-
-
-
 
 </RelativeLayout>

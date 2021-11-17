@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView RVweather;
     private TextInputEditText CityEdt;
     private ImageView IVblack, IVicon, IVsearch;
-    private ArrayList<WeatherRvmodel> weatherRVModelArrayList;
+    private ArrayList<WeatherRvmodel> weatherRvmodelArrayList;
     private WeatherRVadapter weatherRVadapter;
     private LocationManager locationManager;
     private int PERMISSION_CODE = 1;
@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         IVicon = findViewById(R.id.idIVIcon);
         IVblack = findViewById(R.id.idIVBlack);
         IVsearch = findViewById(R.id.idIVSearch);
-        weatherRVModelArrayList = new ArrayList<>();
-        weatherRVadapter = new WeatherRVadapter(this, weatherRVModelArrayList);
+        weatherRvmodelArrayList = new ArrayList<>();
+        weatherRVadapter = new WeatherRVadapter(this, weatherRvmodelArrayList);
         RVweather.setAdapter(weatherRVadapter);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission granted..", Toast.LENGTH_SHORT).show();
             } else{
                 Toast.makeText(this, "Please Provide Permission..", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }
     }
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getWeatherinfo(String cityName){
-        String url = "http://api.weatherapi.com/v1/forecast.json?key=25d9e22bfa044d38881144212211010&q"+ cityName +"&days=1&aqi=no&alerts=no";
+        String url = "http://api.weatherapi.com/v1/forecast.json?key=25d9e22bfa044d38881144212211010&q=" + cityName + "&days=1&aqi=no&alerts=no";
         TVcityname.setText(cityName);
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
@@ -160,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(JSONObject response) {
                 PBloading.setVisibility(View.GONE);
                 RLhome.setVisibility(View.VISIBLE);
-                weatherRVModelArrayList.clear();
+                weatherRvmodelArrayList.clear();
 
 
                 try {
@@ -178,16 +179,16 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     JSONObject forecastObj = response.getJSONObject("forecast");
-                    JSONObject forecastO =forecastObj.getJSONArray("forecastday").getJSONObject(0);
-                    JSONArray hourArray = forecastO.getJSONArray("hour");
+                    JSONObject forcastO =forecastObj.getJSONArray("forecastday").getJSONObject(0);
+                    JSONArray hourArray = forcastO.getJSONArray("hour");
 
-                    for(int i=0;i<hourArray.length();i++){
+                    for(int i=0; i<hourArray.length(); i++){
                         JSONObject hourobj =hourArray.getJSONObject(i);
                         String time = hourobj.getString("time");
                         String temper = hourobj.getString("temp_c");
                         String imag = hourobj.getJSONObject("condition").getString("icon");
                         String wind = hourobj.getString("wind_kmp");
-                        weatherRVModelArrayList.add(new WeatherRvmodel(time,temper, imag, wind));
+                        weatherRvmodelArrayList.add(new WeatherRvmodel(time,temper, imag, wind));
                     }
                     weatherRVadapter.notifyDataSetChanged();
 
