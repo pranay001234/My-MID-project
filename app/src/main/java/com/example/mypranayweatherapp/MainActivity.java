@@ -85,14 +85,7 @@ public class MainActivity extends AppCompatActivity {
         weatherRVadapter = new WeatherRVadapter(this, weatherRvmodelArrayList);
         RVweather.setAdapter(weatherRVadapter);
 
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_CODE);
-         }
 
-        Location location = locationManager.getLastKnownLocation(NETWORK_PROVIDER);
-        CityName = getCityName(location.getLongitude(), location.getLatitude());
-        getWeatherinfo(CityName);
 
 
         IVsearch .setOnClickListener(new View.OnClickListener() {
@@ -109,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
     });
 
 
-    }
+     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -152,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getWeatherinfo(String cityName){
-        String url = "http://api.weatherapi.com/v1/forecast.json?key=25d9e22bfa044d38881144212211010&q=" + cityName + "&days=1&aqi=no&alerts=no";
+        String url = "https://api.weatherapi.com/v1/forecast.json?key=25d9e22bfa044d38881144212211010&q=" + cityName + "&days=1&aqi=no&alerts=no";
         TVcityname.setText(cityName);
         RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
 
@@ -167,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String Temperature = response.getJSONObject("current").getString("temp_c");
                     TVtemperature.setText(Temperature+"°c");
-                    int isDay = response.getJSONObject("current").getInt("is.day");
+                    int isDay = response.getJSONObject("current").getInt("is_day");
                     String condition = response.getJSONObject("current").getJSONObject("condition").getString("text");
                     String conditionIcon = response.getJSONObject("current").getJSONObject("condition").getString("icon");
                     Picasso.get().load("http:".concat(conditionIcon)).into(IVicon);

@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/idRLHome"
-        android:visibility="gone"
+        android:visibility="visible"
         >
 
         <ImageView
@@ -102,15 +102,18 @@
             android:text="23"
             android:textColor="@color/white"
             android:textSize="70dp" />
+
         <ImageView
             android:id="@+id/idIVIcon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/idTVTemperature"
             android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
-            android:src="@mipmap/ic_launcher"
-            />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:src="@mipmap/ic_launcher" />
 
         <TextView
             android:layout_width="match_parent"
@@ -123,16 +126,19 @@
             android:textColor="@color/white"
             android:layout_below="@id/idIVIcon"
             />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_marginBottom="10dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="182dp"
             android:text="Today's Weather Forecast"
             android:textColor="@color/white"
-            android:layout_above="@id/idRVWeather"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
