@@ -43,17 +43,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Calendar calendar;
+    private SimpleDateFormat simpleDateFormat, simpleDateFormat1;
+    private String Date, Date1;
+    private TextView GetDateandtime, GetDateandtime1;
+
 
     private RelativeLayout RLhome;
     private ProgressBar PBloading;
-    private TextView TVcityname, TVtemperature, TVcondition;
-    private RecyclerView RVweather;
+    private TextView TVcityname, TVtemperature, TVcondition, TVtemperature1, TVcondition1;
+ //   private RecyclerView RVweather;
     private TextInputEditText CityEdt;
     private ImageView IVblack, IVicon, IVsearch;
     private ArrayList<WeatherRvmodel> weatherRvmodelArrayList;
@@ -61,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private int PERMISSION_CODE = 1;
     private String CityName;
-
+    private TextView textView;
 
     @SuppressLint("WrongViewCast")
     @Override
@@ -71,21 +79,36 @@ public class MainActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_main);
+
+        GetDateandtime = findViewById(R.id.GetDateandtime);
+        GetDateandtime1 = findViewById(R.id.GetDateandtime1);
+
+        calendar = Calendar.getInstance();
+        simpleDateFormat = new SimpleDateFormat("dd-MMM HH:MM a");
+        simpleDateFormat1 = new SimpleDateFormat(" HH:MM a");
+
+        Date = simpleDateFormat.format(calendar.getTime());
+        Date1 = simpleDateFormat1.format(calendar.getTime());
+
+        GetDateandtime.setText(Date);
+        GetDateandtime1.setText(Date1);
+
+
         RLhome = findViewById(R.id.idRLHome);
         PBloading = findViewById(R.id.idPBloading);
         TVcityname = findViewById(R.id.idTVCityName);
         TVtemperature = findViewById(R.id.idTVTemperature);
+        TVtemperature1 = findViewById(R.id.idTVTemperature1);
         TVcondition = findViewById(R.id.idTVCondition);
-        RVweather = findViewById(R.id.idRVWeather);
+        TVcondition1 = findViewById(R.id.idTVCondition);
+        //  RVweather = findViewById(R.id.idRVWeather);
         CityEdt = findViewById(R.id.idEdtCity);
         IVicon = findViewById(R.id.idIVIcon);
         IVblack = findViewById(R.id.idIVBlack);
         IVsearch = findViewById(R.id.idIVSearch);
         weatherRvmodelArrayList = new ArrayList<>();
         weatherRVadapter = new WeatherRVadapter(this, weatherRvmodelArrayList);
-        RVweather.setAdapter(weatherRVadapter);
-
-
+        //RVweather.setAdapter(weatherRVadapter);
 
 
         IVsearch .setOnClickListener(new View.OnClickListener() {
@@ -160,11 +183,14 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     String Temperature = response.getJSONObject("current").getString("temp_c");
                     TVtemperature.setText(Temperature+"°c");
+                    TVtemperature1.setText(Temperature+"°c");
                     int isDay = response.getJSONObject("current").getInt("is_day");
                     String condition = response.getJSONObject("current").getJSONObject("condition").getString("text");
                     String conditionIcon = response.getJSONObject("current").getJSONObject("condition").getString("icon");
                     Picasso.get().load("http:".concat(conditionIcon)).into(IVicon);
                     TVcondition.setText(condition);
+                    TVcondition1.setText(condition);
+
                     if(isDay==1){
                         Picasso.get().load("https://www.theweathernetwork.com/us/photos/view/25865/fallen-leaves/35742322").into(IVblack);
                     } else{
@@ -172,8 +198,8 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     JSONObject forecastObj = response.getJSONObject("forecast");
-                    JSONObject forcastO =forecastObj.getJSONArray("forecastday").getJSONObject(0);
-                    JSONArray hourArray = forcastO.getJSONArray("hour");
+                    JSONObject forcast =forecastObj.getJSONArray("forecastday").getJSONObject(0);
+                    JSONArray hourArray = forcast.getJSONArray("hour");
 
                     for(int i=0; i<hourArray.length(); i++){
                         JSONObject hourobj =hourArray.getJSONObject(i);
@@ -187,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+
                 }
 
             }
