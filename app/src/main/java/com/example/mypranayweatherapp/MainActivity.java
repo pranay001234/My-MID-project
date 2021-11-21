@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Date1 = simpleDateFormat1.format(calendar.getTime());
 
         GetDateandtime.setText(Date);
-        GetDateandtime1.setText(Date1);
+         GetDateandtime1.setText(Date1);
 
 
         RLhome = findViewById(R.id.idRLHome);
